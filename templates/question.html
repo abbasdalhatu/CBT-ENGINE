@@ -88,14 +88,6 @@
         .progress-fill {
             height: 100%;
             background: var(--primary);
-
-            width: {
-                    {
-                    progress_percent
-                }
-            }
-
-            %;
             transition: width 0.3s ease;
         }
 
@@ -192,7 +184,7 @@
         <div class="header">
             <div class="status">Question {{ current_num }} of {{ total_num }}</div>
             <div class="progress-bar">
-                <div class="progress-fill"></div>
+                <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
             </div>
         </div>
 

@@ -85,20 +85,12 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-
-            background: conic-gradient(var(--primary) calc({
-                        {
-                        score_percent
-                    }
-                }
-
-                %), var(--surface) 0);
-        margin: 30px auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
         }
 
         .score-circle::before {
@@ -201,7 +193,8 @@
 
         <p style="color: var(--text-muted);">You've completed the assessment.</p>
 
-        <div class="score-circle">
+        <div class="score-circle"
+            style="background: conic-gradient(var(--primary) {{ score_percent }}%, var(--surface) 0);">
             <div class="score-value">
                 <div class="score-number">{{ score }}</div>
                 <div class="score-label">out of {{ total }}</div>

@@ -46,49 +46,57 @@ def home():
 
 @app.route('/question', methods=['GET', 'POST'])
 def question():
-    if not engine.current_question and not engine.question_queue:
-        return redirect(url_for('home'))
+    try:
+        if not engine.current_question and not engine.question_queue:
+            return redirect(url_for('home'))
 
-    if request.method == 'POST':
-        user_answer = request.form.get('answer')
-        if user_answer:
-            engine.check_answer(user_answer)
-            # Advance to the next question
-            engine.get_next_question()
+        if request.method == 'POST':
+            user_answer = request.form.get('answer')
+            if user_answer:
+                engine.check_answer(user_answer)
+                # Advance to the next question
+                engine.get_next_question()
 
-    if engine.current_question:
-        # Calculate current question number for the UI
-        current_num = engine.total_questions - len(engine.question_queue)
-        # Pre-calculate progress percentage for the progress bar
-        progress_percent = (current_num / engine.total_questions * 100) if engine.total_questions > 0 else 0
-        
-        return render_template(
-            'question.html', 
-            question=engine.current_question, 
-            current_num=current_num, 
-            total_num=engine.total_questions,
-            progress_percent=progress_percent
-        )
-    else:
-        # No more questions, finish the test
-        engine.finish_test()
-        return redirect(url_for('result'))
+        if engine.current_question:
+            # Calculate current question number for the UI
+            current_num = engine.total_questions - len(engine.question_queue)
+            # Pre-calculate progress percentage for the progress bar
+            progress_percent = (current_num / engine.total_questions * 100) if engine.total_questions > 0 else 0
+            
+            return render_template(
+                'question.html', 
+                question=engine.current_question, 
+                current_num=current_num, 
+                total_num=engine.total_questions,
+                progress_percent=progress_percent
+            )
+        else:
+            # No more questions, finish the test
+            engine.finish_test()
+            return redirect(url_for('result'))
+    except Exception as e:
+        print(f"Error in /question: {e}")
+        return f"Internal Server Error: {e}", 500
 
 @app.route('/result')
 def result():
-    if not engine.end_time: # Test hasn't finished properly
-        return redirect(url_for('home'))
-    
-    # Pre-calculate score percentage for the UI
-    score_percent = (engine.score / engine.total_questions * 100) if engine.total_questions > 0 else 0
+    try:
+        if not engine.end_time: # Test hasn't finished properly
+            return redirect(url_for('home'))
         
-    return render_template(
-        'result.html', 
-        score=engine.score, 
-        total=engine.total_questions, 
-        completion_time=engine.end_time,
-        score_percent=round(score_percent, 1)
-    )
+        # Pre-calculate score percentage for the UI
+        score_percent = (engine.score / engine.total_questions * 100) if engine.total_questions > 0 else 0
+            
+        return render_template(
+            'result.html', 
+            score=engine.score, 
+            total=engine.total_questions, 
+            completion_time=engine.end_time,
+            score_percent=round(score_percent, 1)
+        )
+    except Exception as e:
+        print(f"Error in /result: {e}")
+        return f"Internal Server Error: {e}", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
