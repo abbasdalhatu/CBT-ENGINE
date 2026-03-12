@@ -88,7 +88,7 @@
 
             background: conic-gradient(var(--primary) calc({
                         {
-                        score / total * 100
+                        score_percent
                     }
                 }
 
@@ -188,10 +188,10 @@
 
 <body>
     <div class="container">
-        {% if score / total >= 0.8 %}
+        {% if score / (total if total > 0 else 1) >= 0.8 %}
         <div class="icon">🏆</div>
         <h1>Outstanding!</h1>
-        {% elif score / total >= 0.5 %}
+        {% elif score / (total if total > 0 else 1) >= 0.5 %}
         <div class="icon">👍</div>
         <h1>Good Job!</h1>
         {% else %}
@@ -210,7 +210,7 @@
 
         <div class="stats">
             <div class="stat-item">
-                <span class="stat-value">{{ (score / total * 100) | round(1) }}%</span>
+                <span class="stat-value">{{ (score / (total if total > 0 else 1) * 100) | round(1) }}%</span>
                 <span class="stat-label">Accuracy</span>
             </div>
             <div class="stat-item">
@@ -220,7 +220,7 @@
         </div>
 
         <div class="timestamp">
-            Completed: {{ completion_time.strftime('%b %d, %Y at %I:%M %p') }}
+            Completed: {{ completion_time.strftime('%b %d, %Y at %I:%M %p') if completion_time else 'N/A' }}
         </div>
 
         <a href="/" class="btn">Take Assessment Again</a>

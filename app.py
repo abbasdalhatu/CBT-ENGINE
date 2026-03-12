@@ -59,19 +59,15 @@ def question():
     if engine.current_question:
         # Calculate current question number for the UI
         current_num = engine.total_questions - len(engine.question_queue)
-        if request.method == 'POST':
-             # The queue is decreased, but current_num logic remains valid for display since current_question is popped
-             pass
-        else:
-             pass 
-        # Slightly more robust calculation
-        current_num = engine.total_questions - len(engine.question_queue)
+        # Pre-calculate progress percentage for the progress bar
+        progress_percent = (current_num / engine.total_questions * 100) if engine.total_questions > 0 else 0
         
         return render_template(
             'question.html', 
             question=engine.current_question, 
             current_num=current_num, 
-            total_num=engine.total_questions
+            total_num=engine.total_questions,
+            progress_percent=progress_percent
         )
     else:
         # No more questions, finish the test
@@ -82,12 +78,16 @@ def question():
 def result():
     if not engine.end_time: # Test hasn't finished properly
         return redirect(url_for('home'))
+    
+    # Pre-calculate score percentage for the UI
+    score_percent = (engine.score / engine.total_questions * 100) if engine.total_questions > 0 else 0
         
     return render_template(
         'result.html', 
         score=engine.score, 
         total=engine.total_questions, 
-        completion_time=engine.end_time
+        completion_time=engine.end_time,
+        score_percent=round(score_percent, 1)
     )
 
 if __name__ == '__main__':
