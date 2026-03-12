@@ -14,4 +14,18 @@ class Question:
         self.answer = answer
 
 class TestEngine:
-    pass
+    def __init__(self):
+        self.question_queue = collections.deque()
+        self.score = 0
+        self.total_questions = 0
+        self.start_time = None
+        self.end_time = None
+
+    def load_questions(self, questions_list):
+        """
+        Loads a list of Question objects into the queue.
+        """
+        for q in questions_list:
+            self.question_queue.append(q)
+        self.total_questions = len(self.question_queue)
+        self.start_time = datetime.now()
