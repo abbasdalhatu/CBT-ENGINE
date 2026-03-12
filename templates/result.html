@@ -4,73 +4,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini CBT Engine - Result</title>
+    <title>Mini CBT Engine - Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at bottom left, #1e1b4b, var(--bg));
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 40px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+            padding: 50px 40px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s 0.3s both cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
         }
 
         h1 {
-            color: #0056b3;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
         }
 
-        .score {
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+
+            background: conic-gradient(var(--primary) calc({
+                        {
+                        score / total * 100
+                    }
+                }
+
+                %), var(--surface) 0);
+        margin: 30px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .score-circle::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            background: var(--surface);
+            border-radius: 50%;
+        }
+
+        .score-value {
+            position: relative;
+            z-index: 10;
+        }
+
+        .score-number {
             font-size: 3rem;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #d9534f;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
         }
 
         .timestamp {
-            color: #777;
-            font-size: 0.9rem;
-            margin-top: 30px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+            opacity: 0.7;
         }
 
         .btn {
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #0056b3;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
         }
 
         .btn:hover {
-            background-color: #004494;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Test Completed!</h1>
-        <p>Here is your final score:</p>
-        <div class="score">{{ score }} / {{ total }}</div>
-        <p>Percentage: {{ (score / total * 100) | round(1) }}%</p>
+        {% if score / total >= 0.8 %}
+        <div class="icon">🏆</div>
+        <h1>Outstanding!</h1>
+        {% elif score / total >= 0.5 %}
+        <div class="icon">👍</div>
+        <h1>Good Job!</h1>
+        {% else %}
+        <div class="icon">📚</div>
+        <h1>Keep Learning!</h1>
+        {% endif %}
 
-        <div class="timestamp">
-            Completed on: {{ completion_time.strftime('%Y-%m-%d %H:%M:%S') }}
+        <p style="color: var(--text-muted);">You've completed the assessment.</p>
+
+        <div class="score-circle">
+            <div class="score-value">
+                <div class="score-number">{{ score }}</div>
+                <div class="score-label">out of {{ total }}</div>
+            </div>
         </div>
 
-        <a href="/" class="btn">Take Test Again</a>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value">{{ (score / total * 100) | round(1) }}%</span>
+                <span class="stat-label">Accuracy</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">{{ total }}</span>
+                <span class="stat-label">Questions</span>
+            </div>
+        </div>
+
+        <div class="timestamp">
+            Completed: {{ completion_time.strftime('%b %d, %Y at %I:%M %p') }}
+        </div>
+
+        <a href="/" class="btn">Take Assessment Again</a>
     </div>
 </body>
 
