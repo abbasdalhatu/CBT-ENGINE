@@ -29,3 +29,12 @@ class TestEngine:
             self.question_queue.append(q)
         self.total_questions = len(self.question_queue)
         self.start_time = datetime.now()
+
+    def get_next_question(self):
+        """
+        Retrieves the next question from the queue (FIFO).
+        Returns None if the queue is empty.
+        """
+        if self.question_queue:
+            return self.question_queue.popleft()
+        return None
