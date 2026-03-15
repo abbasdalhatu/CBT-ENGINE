@@ -173,80 +173,6 @@
             opacity: 0.7;
         }
 
-        .review-section {
-            margin-top: 20px;
-            text-align: left;
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .review-section::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .review-section::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-        }
-
-        .review-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-
-        .review-card.correct {
-            border-left: 4px solid var(--success);
-        }
-
-        .review-card.incorrect {
-            border-left: 4px solid var(--danger);
-        }
-
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-
-        .q-num {
-            font-weight: 700;
-            color: var(--text-muted);
-        }
-
-        .status-pill {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .correct .status-pill { background: rgba(16, 185, 129, 0.1); color: var(--success); }
-        .incorrect .status-pill { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
-
-        .q-text {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .result-details {
-            font-size: 0.9rem;
-        }
-
-        .result-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 5px;
-        }
-
-        .result-row .label { color: var(--text-muted); }
-        .result-row .value.success { color: var(--success); font-weight: 600; }
-
         .btn {
             width: 100%;
             padding: 16px;
@@ -308,30 +234,6 @@
             Completed: {{ completion_time.strftime('%b %d, %Y at %I:%M %p') if completion_time else 'N/A' }}
         </div>
 
-        <div class="review-section">
-            <h2 style="font-size: 1.2rem; margin-bottom: 20px; text-align: left;">Detailed Review</h2>
-            {% for entry in user_responses %}
-            <div class="review-card {{ 'correct' if entry.is_correct else 'incorrect' }}">
-                <div class="review-header">
-                    <span class="q-num">Q{{ loop.index }}</span>
-                    <span class="status-pill">{{ 'Correct' if entry.is_correct else 'Incorrect' }}</span>
-                </div>
-                <div class="q-text">{{ entry.question.text }}</div>
-                <div class="result-details">
-                    <div class="result-row">
-                        <span class="label">Your Answer:</span>
-                        <span class="value">{{ entry.user_answer }}</span>
-                    </div>
-                    {% if not entry.is_correct %}
-                    <div class="result-row">
-                        <span class="label">Correct Answer:</span>
-                        <span class="value success">{{ entry.correct_answer }}</span>
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
 
         <a href="/" class="btn" style="margin-top: 30px;">Take Assessment Again</a>
     </div>

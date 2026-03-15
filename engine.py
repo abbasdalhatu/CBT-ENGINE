@@ -22,7 +22,6 @@ class TestEngine:
         self.start_time = None
         self.end_time = None
         self.current_question = None
-        self.user_responses = [] # List of (question_obj, user_answer_str, is_correct_bool)
 
     def load_questions(self, questions_list, shuffle=False):
         """
@@ -59,12 +58,6 @@ class TestEngine:
             is_correct = user_answer == self.current_question.answer
             if is_correct:
                 self.score += 1
-            self.user_responses.append({
-                'question': self.current_question,
-                'user_answer': user_answer,
-                'correct_answer': self.current_question.answer,
-                'is_correct': is_correct
-            })
 
     @property
     def duration(self):

@@ -75,8 +75,7 @@ def result():
             total=engine.total_questions, 
             completion_time=engine.end_time,
             score_percent=round(score_percent, 1),
-            duration=engine.duration,
-            user_responses=engine.user_responses
+            duration=engine.duration
         )
     except Exception as e:
         print(f"Error in /result: {e}")
