@@ -3,6 +3,9 @@ import random
 from datetime import datetime
 
 class Question:
+    """
+    Represents a single assessment question with its associated options and correct answer.
+    """
     def __init__(self, id, text, options, answer):
         """
         Encapsulates a single test question.
@@ -15,6 +18,10 @@ class Question:
         self.answer = answer
 
 class TestEngine:
+    """
+    Core logic for the Computer Based Test (CBT) engine.
+    Handles question queuing, scoring, and session timing.
+    """
     def __init__(self):
         self.question_queue = collections.deque()
         self.score = 0
@@ -69,7 +76,8 @@ class TestEngine:
     @property
     def duration(self):
         """
-        Calculates the duration of the test in seconds.
+        Calculates the total time taken for the test in seconds.
+        Returns 0 if the test is still in progress.
         """
         if self.start_time and self.end_time:
             delta = self.end_time - self.start_time
