@@ -226,6 +226,19 @@
             </div>
             <button type="submit" class="btn">Next Question</button>
         </form>
+        <script>
+            document.addEventListener('keydown', (e) => {
+                if (e.key >= '1' && e.key <= '4') {
+                    const index = parseInt(e.key) - 1;
+                    const radios = document.getElementsByName('answer');
+                    if (radios[index]) {
+                        radios[index].checked = true;
+                        // Trigger change for any :has selectors if needed, 
+                        // though radio checking handles :checked naturally.
+                    }
+                }
+            });
+        </script>
     </div>
 </body>
 
