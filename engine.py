@@ -52,10 +52,18 @@ class TestEngine:
     def check_answer(self, user_answer):
         """
         Checks the user's answer against the current question's correct answer.
-        Updates the score if correct.
+        Updates the score and stores the response.
         """
-        if self.current_question and user_answer == self.current_question.answer:
-            self.score += 1
+        if self.current_question:
+            is_correct = user_answer == self.current_question.answer
+            if is_correct:
+                self.score += 1
+            self.user_responses.append({
+                'question': self.current_question,
+                'user_answer': user_answer,
+                'correct_answer': self.current_question.answer,
+                'is_correct': is_correct
+            })
 
     @property
     def duration(self):
