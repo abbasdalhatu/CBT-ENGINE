@@ -40,23 +40,23 @@
             max-width: 650px;
             width: 100%;
             padding: 40px;
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.4s ease-out;
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes fadeIn {
+        @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: scale(0.98);
+                transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
 
@@ -78,17 +78,36 @@
         }
 
         .progress-bar {
-            width: 100px;
-            height: 6px;
-            background: var(--surface-hover);
-            border-radius: 3px;
+            width: 150px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
             overflow: hidden;
+            position: relative;
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--primary);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--primary), #818cf8);
+            transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            position: relative;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: progress-shimmer 2s infinite;
+        }
+
+        @keyframes progress-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .question-text {
@@ -108,44 +127,50 @@
         .option-label {
             display: flex;
             align-items: center;
-            padding: 16px 20px;
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 12px;
+            padding: 18px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .option-label:hover {
-            border-color: var(--primary-hover);
-            background: rgba(79, 70, 229, 0.1);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateX(4px);
         }
 
         .option-label input[type="radio"] {
             appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--text-muted);
+            width: 22px;
+            height: 22px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             margin-right: 15px;
             display: grid;
             place-content: center;
             transition: all 0.2s ease;
+            background: rgba(15, 23, 42, 0.4);
         }
 
         .option-label input[type="radio"]::before {
             content: "";
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             transform: scale(0);
-            transition: 120ms transform ease-in-out;
-            box-shadow: inset 1em 1em var(--primary);
+            transition: 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
         }
 
         .option-label input[type="radio"]:checked {
             border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
         }
 
         .option-label input[type="radio"]:checked::before {
