@@ -224,7 +224,10 @@
                 </label>
                 {% endfor %}
             </div>
-            <button type="submit" class="btn">Next Question</button>
+            <div style="display: flex; gap: 12px; margin-top: 16px;">
+                <button type="submit" class="btn">Next Question</button>
+                <a href="/skip" class="btn" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); width: 140px; display: flex; align-items: center; justify-content: center; text-decoration: none;">Skip</a>
+            </div>
         </form>
         <script>
             document.addEventListener('keydown', (e) => {

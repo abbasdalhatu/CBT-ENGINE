@@ -58,6 +58,13 @@ class TestEngine:
             is_correct = user_answer == self.current_question.answer
             if is_correct:
                 self.score += 1
+    def skip_question(self):
+        """
+        Moves the current question to the end of the queue for later.
+        """
+        if self.current_question:
+            self.question_queue.append(self.current_question)
+            self.current_question = None
 
     @property
     def duration(self):

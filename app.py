@@ -60,6 +60,12 @@ def question():
         print(f"Error in /question: {e}")
         return f"Internal Server Error: {e}", 500
 
+@app.route('/skip')
+def skip():
+    engine.skip_question()
+    engine.get_next_question()
+    return redirect(url_for('question'))
+
 @app.route('/result')
 def result():
     try:
