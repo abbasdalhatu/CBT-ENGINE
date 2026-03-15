@@ -1,35 +1,23 @@
 # Mini CBT Engine
 
-A simple Computer-Based Test (CBT) engine using Flask, demonstrating Object-Oriented Programming and Data Structures (Queue/FIFO).
+A lightweight, premium Computer Based Test (CBT) engine built with Flask.
 
-## Prerequisites
-- Python 3.6 or higher installed on your computer.
+## Features
+- **Premium UI**: Modern glassmorphism design with smooth transitions and animated backgrounds.
+- **Dynamic Assessment**: Randomized questions and options for every session.
+- **Timer & Progress**: Real-time duration tracking and animated progress bars.
+- **Performance Feedback**: Score-based personalized messages on the results page.
+- **Score History**: Persistent local tracking of previous attempts using `localStorage`.
+- **Accessibility**: Keyboard shortcuts (Keys 1-4) for quick option selection.
+- **Skip Logic**: Move difficult questions to the end of the queue for later review.
 
-## Setup Instructions
-1. Open your terminal or command prompt.
-2. Navigate to the project directory where you downloaded/cloned the code.
-3. (Optional but recommended) Create a virtual environment:
-   ```bash
-   python -m venv venv
-   ```
-4. Activate the virtual environment:
-   - On Windows: `venv\Scripts\activate`
-   - On Mac/Linux: `source venv/bin/activate`
-5. Install Flask:
-   ```bash
-   pip install Flask
-   ```
-
-## Running the Application
-1. In the terminal, ensure you are in the project folder (`CBT ENGINE`).
-2. Run the application:
-   ```bash
-   python app.py
-   ```
-3. Open a web browser and go to `http://127.0.0.1:5000/`.
-4. Click "Start Test" and answer the questions.
+## Setup & Run
+1. Install dependencies: `pip install -r requirements.txt`
+2. Run the application: `python app.py`
+3. Open `http://127.0.0.1:5000` in your browser.
 
 ## Project Structure
 - `app.py`: Flask web application and routes.
 - `engine.py`: Contains OOP logic (`TestEngine` and `Question` classes).
-- `templates/`: Contains HTML files (`index.html`, `question.html`, `result.html`).
+- `questions.json`: Externalized question repository.
+- `templates/`: Jinja2 templates for index, question, and result pages.
