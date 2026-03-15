@@ -109,8 +109,13 @@
             position: absolute;
             inset: 0;
             border-radius: 50%;
-            background: radial-gradient(circle at center, transparent 60%, rgba(99, 102, 241, 0.1));
-            pointer-events: none;
+            transition: background 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: ringFill 1.5s ease-out forwards;
+        }
+
+        @keyframes ringFill {
+            from { background: conic-gradient(var(--primary) 0%, var(--surface) 0); }
+            to { background: conic-gradient(var(--primary) var(--score-percent), var(--surface) 0); }
         }
 
         .score-value {
