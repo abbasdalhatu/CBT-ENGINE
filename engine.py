@@ -1,4 +1,5 @@
 import collections
+import random
 from datetime import datetime
 
 class Question:
@@ -22,12 +23,18 @@ class TestEngine:
         self.end_time = None
         self.current_question = None
 
-    def load_questions(self, questions_list):
+    def load_questions(self, questions_list, shuffle=False):
         """
         Loads a list of Question objects into the queue.
         """
+        if shuffle:
+            random.shuffle(questions_list)
+            
         for q in questions_list:
+            # Also shuffle options for each question
+            random.shuffle(q.options)
             self.question_queue.append(q)
+            
         self.total_questions = len(self.question_queue)
         self.start_time = datetime.now()
 
@@ -49,6 +56,16 @@ class TestEngine:
         """
         if self.current_question and user_answer == self.current_question.answer:
             self.score += 1
+
+    @property
+    def duration(self):
+        """
+        Calculates the duration of the test in seconds.
+        """
+        if self.start_time and self.end_time:
+            delta = self.end_time - self.start_time
+            return int(delta.total_seconds())
+        return 0
 
     def finish_test(self):
         """

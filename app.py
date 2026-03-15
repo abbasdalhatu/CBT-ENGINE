@@ -18,7 +18,7 @@ def home():
         # Re-initialize engine and load questions for a new session
         global engine
         engine = TestEngine()
-        engine.load_questions(load_questions_from_file())
+        engine.load_questions(load_questions_from_file(), shuffle=True)
         
         # Load the first question
         engine.get_next_question()
