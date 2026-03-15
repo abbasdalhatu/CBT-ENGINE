@@ -3,8 +3,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from engine import TestEngine, Question
 
 app = Flask(__name__)
-# We use a global engine instance for this simple, single-user demonstration.
-# In a real app with multiple users, we'd use session storage or a database.
+# Global engine instance for demonstration
+# In production, use session storage for multi-user support
 engine = TestEngine()
 
 def load_questions_from_file():
