@@ -22,6 +22,7 @@ class TestEngine:
         self.start_time = None
         self.end_time = None
         self.current_question = None
+        self.user_responses = [] # List of (question_obj, user_answer_str, is_correct_bool)
 
     def load_questions(self, questions_list, shuffle=False):
         """
