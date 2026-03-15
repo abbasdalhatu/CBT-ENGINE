@@ -184,7 +184,7 @@
         <div class="header">
             <div class="status">Question {{ current_num }} of {{ total_num }}</div>
             <div class="progress-bar">
-                <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
+                <div class="progress-fill" style="--width: {{ progress_percent }}%; width: var(--width);"></div>
             </div>
         </div>
 

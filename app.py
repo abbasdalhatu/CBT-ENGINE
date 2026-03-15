@@ -17,17 +17,7 @@ SAMPLE_QUESTIONS = [
     Question(7, "What is the output of `print(2 ** 3)`?", ["5", "6", "8", "9"], "8"),
     Question(8, "How do you start a comment in Python?", ["//", "/*", "<!--", "#"], "#"),
     Question(9, "Which of the following is used to handle exceptions in Python?", ["try/except", "catch/throw", "handle/error", "try/catch"], "try/except"),
-    Question(10, "What is the purpose of the `__init__` method in a Python class?", ["It initializes the class properties", "It runs when the object is deleted", "It creates a new class", "It prints the object"], "It initializes the class properties"),
-    Question(11, "Which built-in function can be used to read input from a user via the console?", ["read()", "input()", "get()", "scan()"], "input()"),
-    Question(12, "In Flask, which object holds data from a submitted HTML form?", ["request.form", "request.args", "request.data", "flask.form"], "request.form"),
-    Question(13, "What does HTTP stand for?", ["HyperText Transfer Protocol", "HyperText Transmission Process", "Hyperlink Transfer Technology", "HyperText Transmission Protocol"], "HyperText Transfer Protocol"),
-    Question(14, "Which HTML tag is used to create a hyperlink?", ["<link>", "<a>", "<href>", "<hyperlink>"], "<a>"),
-    Question(15, "What command is used to record changes to the repository in Git?", ["git commit", "git save", "git push", "git add"], "git commit"),
-    Question(16, "What data structure does the LIFO principle describe?", ["Queue", "Tree", "Stack", "Graph"], "Stack"),
-    Question(17, "What does the `len()` function return for a string?", ["The number of words in the string", "The number of characters in the string", "The size of the string in bytes", "The number of unique characters"], "The number of characters in the string"),
-    Question(18, "Which decorator is used to define a route in Flask?", ["@app.route()", "@flask.route()", "@route()", "@app.path()"], "@app.route()"),
-    Question(19, "Which statement is used to import a module in Python?", ["include module", "require module", "import module", "using module"], "import module"),
-    Question(20, "What is the extension of a Python file?", [".pt", ".py", ".python", ".pyt"], ".py")
+    Question(10, "What is the purpose of the `__init__` method in a Python class?", ["It initializes the class properties", "It runs when the object is deleted", "It creates a new class", "It prints the object"], "It initializes the class properties")
 ]
 
 @app.route('/', methods=['GET', 'POST'])

@@ -111,6 +111,7 @@
             font-weight: 800;
             background: linear-gradient(135deg, #a5b4fc, #c084fc);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -194,7 +195,7 @@
         <p style="color: var(--text-muted);">You've completed the assessment.</p>
 
         <div class="score-circle"
-            style="background: conic-gradient(var(--primary) {{ score_percent }}%, var(--surface) 0);">
+            style="--score-percent: {{ score_percent }}%; background: conic-gradient(var(--primary) var(--score-percent), var(--surface) 0);">
             <div class="score-value">
                 <div class="score-number">{{ score }}</div>
                 <div class="score-label">out of {{ total }}</div>
