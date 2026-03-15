@@ -209,7 +209,17 @@
         <h1>Keep Learning!</h1>
         {% endif %}
 
-        <p style="color: var(--text-muted);">You've completed the assessment.</p>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">
+            {% if score_percent >= 90 %}
+            Incredible! You have a perfect or near-perfect understanding of the material.
+            {% elif score_percent >= 70 %}
+            Great job! You've shown a strong grasp of the concepts.
+            {% elif score_percent >= 50 %}
+            Not bad! You've passed, but there's room for improvement.
+            {% else %}
+            Keep practicing. Review the material and try again to improve your score.
+            {% endif %}
+        </p>
 
         <div class="score-circle"
             style="--score-percent: {{ score_percent }}%; background: conic-gradient(var(--primary) var(--score-percent), var(--surface) 0);">
