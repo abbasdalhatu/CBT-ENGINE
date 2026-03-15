@@ -215,7 +215,7 @@
 
         <div class="question-text">{{ question.text }}</div>
 
-        <form action="/question" method="POST">
+        <form action="/question" method="POST" id="questionForm">
             <div class="options-group">
                 {% for option in question.options %}
                 <label class="option-label">
@@ -230,14 +230,23 @@
             </div>
         </form>
         <script>
+            const isLast = {{ 'true' if current_num == total_num else 'false' }};
+            const form = document.getElementById('questionForm');
+            
+            form.onsubmit = (e) => {
+                if (isLast) {
+                    if (!confirm("Are you sure you want to finish the assessment?")) {
+                        e.preventDefault();
+                    }
+                }
+            };
+
             document.addEventListener('keydown', (e) => {
                 if (e.key >= '1' && e.key <= '4') {
                     const index = parseInt(e.key) - 1;
                     const radios = document.getElementsByName('answer');
                     if (radios[index]) {
                         radios[index].checked = true;
-                        // Trigger change for any :has selectors if needed, 
-                        // though radio checking handles :checked naturally.
                     }
                 }
             });
