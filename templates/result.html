@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini CBT Engine - Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at bottom left, #1e1b4b, var(--bg));
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 90%;
+            padding: 50px 40px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s 0.3s both cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 40px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: conic-gradient(var(--primary) var(--score-percent), rgba(255, 255, 255, 0.05) 0);
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .score-circle::before {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            background: #1e293b;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .score-circle::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            transition: background 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: ringFill 1.5s ease-out forwards;
+        }
+
+        @keyframes ringFill {
+            from { background: conic-gradient(var(--primary) 0%, var(--surface) 0); }
+            to { background: conic-gradient(var(--primary) var(--score-percent), var(--surface) 0); }
+        }
+
+        .score-value {
+            position: relative;
+            z-index: 10;
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timestamp {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+            opacity: 0.7;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {% if score / (total if total > 0 else 1) >= 0.8 %}
+        <div class="icon">🏆</div>
+        <h1>Outstanding!</h1>
+        {% elif score / (total if total > 0 else 1) >= 0.5 %}
+        <div class="icon">👍</div>
+        <h1>Good Job!</h1>
+        {% else %}
+        <div class="icon">📚</div>
+        <h1>Keep Learning!</h1>
+        {% endif %}
+
+        <p style="color: var(--text-muted); margin-bottom: 30px;">
+            {% if score_percent >= 90 %}
+            Incredible! You have a perfect or near-perfect understanding of the material.
+            {% elif score_percent >= 70 %}
+            Great job! You've shown a strong grasp of the concepts.
+            {% elif score_percent >= 50 %}
+            Not bad! You've passed, but there's room for improvement.
+            {% else %}
+            Keep practicing. Review the material and try again to improve your score.
+            {% endif %}
+        </p>
+
+        <div class="score-circle"
+            style="--score-percent: {{ score_percent }}%; background: conic-gradient(var(--primary) var(--score-percent), var(--surface) 0);">
+            <div class="score-value">
+                <div class="score-number">{{ score }}</div>
+                <div class="score-label">out of {{ total }}</div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value">{{ duration }}s</span>
+                <span class="stat-label">Time Taken</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">{{ total }}</span>
+                <span class="stat-label">Questions</span>
+            </div>
+        </div>
+
+        <div class="timestamp">
+            Completed: {{ completion_time.strftime('%b %d, %Y at %I:%M %p') if completion_time else 'N/A' }}
+        </div>
+
+
+        <div class="score-history" id="scoreHistory" style="margin-top: 40px; text-align: left; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); display: none;">
+            <h3 style="font-size: 1rem; margin-bottom: 15px; color: var(--text-main);">Recent Attempts</h3>
+            <div id="historyList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const currentScore = {{ score }};
+                const totalQuestions = {{ total }};
+                const date = new Date().toLocaleDateString();
+                
+                // Save score to history
+                let history = JSON.parse(localStorage.getItem('cbt_history') || '[]');
+                history.unshift({ score: currentScore, total: totalQuestions, date: date });
+                history = history.slice(0, 5); // Keep last 5
+                localStorage.setItem('cbt_history', JSON.stringify(history));
+
+                // Display history (excluding current attempt which is at the top)
+                if (history.length > 1) {
+                    const historyList = document.getElementById('historyList');
+                    const historySection = document.getElementById('scoreHistory');
+                    historySection.style.display = 'block';
+                    
+                    history.slice(1).forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'history-item';
+                        div.style.cssText = 'display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 8px; transition: all 0.3s ease; cursor: default;';
+                        div.innerHTML = `<span>${item.date}</span> <span style="font-weight: 600; color: var(--primary);">${item.score}/${item.total}</span>`;
+                        
+                        // Add hover effect via JS since it's dynamic
+                        div.onmouseover = () => {
+                            div.style.background = 'rgba(255, 255, 255, 0.05)';
+                            div.style.transform = 'translateX(5px)';
+                        };
+                        div.onmouseout = () => {
+                            div.style.background = 'transparent';
+                            div.style.transform = 'translateX(0)';
+                        };
+                        
+                        historyList.appendChild(div);
+                    });
+                }
+            });
+        </script>
+
+        <a href="/" class="btn" style="margin-top: 30px;">Take Assessment Again</a>
+    </div>
+</body>
+
+</html>
