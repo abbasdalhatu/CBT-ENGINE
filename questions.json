@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "text": "What keyword is used to define a function in Python?",
+        "options": ["func", "def", "lambda", "function"],
+        "answer": "def"
+    },
+    {
+        "id": 2,
+        "text": "Which data structure in Python is mutable and uses square brackets?",
+        "options": ["Tuple", "Dictionary", "Set", "List"],
+        "answer": "List"
+    },
+    {
+        "id": 3,
+        "text": "What module gives us access to current dates and times in Python standard library?",
+        "options": ["time", "datetime", "calendar", "moment"],
+        "answer": "datetime"
+    },
+    {
+        "id": 4,
+        "text": "In Object-Oriented Programming, what refers to bundling data and methods that work on that data within one unit?",
+        "options": ["Inheritance", "Polymorphism", "Encapsulation", "Abstraction"],
+        "answer": "Encapsulation"
+    },
+    {
+        "id": 5,
+        "text": "Which Flask method is used to render an HTML template?",
+        "options": ["return_template", "render_file", "render_template", "show_html"],
+        "answer": "render_template"
+    },
+    {
+        "id": 6,
+        "text": "Which of the following is NOT a core data type in Python?",
+        "options": ["Class", "Dictionary", "Tuple", "List"],
+        "answer": "Class"
+    },
+    {
+        "id": 7,
+        "text": "What is the output of `print(2 ** 3)`?",
+        "options": ["5", "6", "8", "9"],
+        "answer": "8"
+    },
+    {
+        "id": 8,
+        "text": "How do you start a comment in Python?",
+        "options": ["//", "/*", "<!--", "#"],
+        "answer": "#"
+    },
+    {
+        "id": 9,
+        "text": "Which of the following is used to handle exceptions in Python?",
+        "options": ["try/except", "catch/throw", "handle/error", "try/catch"],
+        "answer": "try/except"
+    },
+    {
+        "id": 10,
+        "text": "What is the purpose of the `__init__` method in a Python class?",
+        "options": ["It initializes the class properties", "It runs when the object is deleted", "It creates a new class", "It prints the object"],
+        "answer": "It initializes the class properties"
+    }
+]
