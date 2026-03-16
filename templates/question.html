@@ -231,15 +231,6 @@
         </form>
         <script>
             const isLast = "{{ current_num }}" === "{{ total_num }}";
-            const form = document.getElementById('questionForm');
-            
-            form.onsubmit = (e) => {
-                if (isLast) {
-                    if (!confirm("Are you sure you want to finish the assessment?")) {
-                        e.preventDefault();
-                    }
-                }
-            };
 
             document.addEventListener('keydown', (e) => {
                 if (e.key >= '1' && e.key <= '4') {
